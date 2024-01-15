@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -21,6 +20,8 @@ public class Pipeline extends OpenCvPipeline {
         RIGHT,
         CENTER
     }
+
+    int position;
     private Location location;
     public Pipeline (Telemetry t){ telemetry = t;}
 
@@ -60,15 +61,19 @@ public class Pipeline extends OpenCvPipeline {
         if(leftValue > rightValue){
             if(leftValue > centerValue){
                 telemetry.addLine("left");
+                position = 1;
             }else{
                 telemetry.addLine("center");
+                position = 2;
             }
             telemetry.update();
         }else{
             if(rightValue > centerValue){
                 telemetry.addLine("right");
+                position = 3;
             }else{
                 telemetry.addLine("center");
+                position = 2;
             }
             telemetry.update();
         }
@@ -86,5 +91,7 @@ public class Pipeline extends OpenCvPipeline {
     public Location getLocation() {
         return location;
     }
+    public int getPos(){
+        return position;
+    }
 }
-

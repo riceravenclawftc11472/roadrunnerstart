@@ -46,12 +46,36 @@ public class CameraTest extends LinearOpMode {
             public void onError(int errorCode) {}
         });
 
+        int position1 = pipeline.getPos();
+
+        // Motor config
+
+        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
+        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
+        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        DcMotor rightSlideMotor = hardwareMap.get(DcMotor.class, "rightSlideMotor");
+        DcMotor leftSlideMotor = hardwareMap.get(DcMotor.class, "leftSlideMotor");
+        CRServo rightArmMotor = hardwareMap.get(CRServo.class, "rightArmServo");
+        CRServo leftArmMotor = hardwareMap.get(CRServo.class, "leftArmServo");
+        Servo drone = hardwareMap.get(Servo.class, "droneServo");
+        Servo wrist = hardwareMap.get(Servo.class, "wrist");
+        Servo lock = hardwareMap.get(Servo.class, "lock");
+        CRServo intake = hardwareMap.get(CRServo.class, "intake");
+
+
+        // Reverse the right side motors. This may be wrong for your setup.
+        // If your robot moves backwards when commanded to go forwards,
+        // reverse the left side instead.
+        // See the note about this earlier on this page.
+        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         while (!isStarted() && !isStopRequested()) {}
         while(opModeIsActive()){
 
         }
     }
 }
-
 
 
