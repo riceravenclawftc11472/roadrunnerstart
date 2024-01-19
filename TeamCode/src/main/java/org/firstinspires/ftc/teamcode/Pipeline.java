@@ -63,18 +63,19 @@ public class Pipeline extends OpenCvPipeline {
                 telemetry.addLine("left");
                 position = 1;
             }else{
-                telemetry.addLine("center");
+                //telemetry.addLine("center");
                 position = 2;
             }
             telemetry.update();
         }else{
             if(rightValue > centerValue){
-                telemetry.addLine("right");
+                //telemetry.addLine("right");
                 position = 3;
             }else{
-                telemetry.addLine("center");
+                //telemetry.addLine("center");
                 position = 2;
             }
+            telemetry.addData("Pos:", position);
             telemetry.update();
         }
 

@@ -46,7 +46,8 @@ public class CameraTest extends LinearOpMode {
             public void onError(int errorCode) {}
         });
 
-        int position1 = pipeline.getPos();
+
+
 
         // Motor config
 
@@ -58,7 +59,7 @@ public class CameraTest extends LinearOpMode {
         DcMotor leftSlideMotor = hardwareMap.get(DcMotor.class, "leftSlideMotor");
         CRServo rightArmMotor = hardwareMap.get(CRServo.class, "rightArmServo");
         CRServo leftArmMotor = hardwareMap.get(CRServo.class, "leftArmServo");
-        Servo drone = hardwareMap.get(Servo.class, "droneServo");
+        //Servo drone = hardwareMap.get(Servo.class, "droneServo");
         Servo wrist = hardwareMap.get(Servo.class, "wrist");
         Servo lock = hardwareMap.get(Servo.class, "lock");
         CRServo intake = hardwareMap.get(CRServo.class, "intake");
@@ -68,13 +69,46 @@ public class CameraTest extends LinearOpMode {
         // If your robot moves backwards when commanded to go forwards,
         // reverse the left side instead.
         // See the note about this earlier on this page.
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        Robot robot = new Robot(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor, rightSlideMotor, leftSlideMotor, telemetry);
 
         while (!isStarted() && !isStopRequested()) {}
-        while(opModeIsActive()){
+        int position1 = pipeline.getPos();
+        telemetry.clearAll();
+        telemetry.update();
 
+        telemetry.addData("Pos:", pipeline.position);
+        telemetry.update();
+        sleep(2000);
+
+        if(position1 == 1){
+
+            robot.move(1200, 1200, -1200, -1200);
+            robot.move(-1100, -1100, -1100, -1100);
+            robot.move(-140, -140, 140, 140);
+            //telemetry.addLine("left");
+            telemetry.addData("Pos:", pipeline.position);
+            telemetry.update();
+        }else if(position1 == 3){
+
+            robot.move(1200, 1200, -1200, -1200);
+            robot.move(1100, 1100, 1100, 1100);
+            robot.move(140, 140, -140, -140);
+            //telemetry.addLine("right");
+            telemetry.addData("Pos:", pipeline.position);
+            telemetry.update();
+        }else if(position1 == 2){
+
+            robot.move(1240, 1240, -1240, -1240);
+            //telemetry.addLine("center");
+            telemetry.addData("Pos:", pipeline.position);
+            telemetry.update();
         }
+        sleep(10000);
+
+
+
+
+
     }
 }
 
